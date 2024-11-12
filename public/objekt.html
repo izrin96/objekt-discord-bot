@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objekt Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- with bold -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      @font-face {
+        font-family: Dot-Matrix;
+        font-weight: 400;
+        font-display: swap;
+        src: url(/dot_matrix.woff2) format("woff2");
+      }
+    </style>
+  </head>
+  <body class="">
+    <div class="flex">
+      <div
+        class="relative overflow-hidden flex-none"
+        style="--objekt-background-color: {background}; --objekt-text-color: {text}"
+      >
+        <img alt="{name}" src="{imageFront}" />
+        <div
+          class="absolute h-full items-center w-[11%] flex gap-4 justify-center top-0 right-0 [writing-mode:vertical-lr] font-bold text-[var(--objekt-text-color)] select-none"
+          style="font-size: 56px"
+        >
+          <span>{collectionNo}</span>
+          <span
+            style="
+              font-family: 'Dot-Matrix', sans-serif;
+              font-weight: 500;
+              padding-right: 0.2em;
+            "
+            >#{serialNo}</span
+          >
+        </div>
+      </div>
+      <div class="flex-none">
+        <img alt="{name}" src="{imageBack}" />
+      </div>
+    </div>
+  </body>
+</html>

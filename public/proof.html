@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proof shot playground</title>
+  </head>
+  <body>
+    <div
+      id="container"
+      style="
+        position: relative;
+        overflow: hidden;
+        width: 1280px;
+        height: 1280px;
+        scale: 2;
+        transform-origin: top left;
+      "
+    >
+      <!-- src="https://placehold.co/1280x1280" -->
+      <!-- user image -->
+      <img
+        src="https://placehold.co/1280x1280"
+        id="user"
+        alt="User image placeholder"
+        style="width: 100%; height: 100%; object-fit: cover"
+      />
+
+      <!-- Parent container for objekt and overlay images -->
+      <div
+        id="objekt-container"
+        style="
+          position: absolute;
+          top: 251px;
+          right: -54px;
+          width: 620px;
+          height: 960px;
+          transform-origin: center;
+          scale: 0.855;
+          transform: rotate(-10deg);
+        "
+      >
+        <!-- objekt image -->
+        <img
+          src="https://placehold.co/620x960"
+          id="objekt"
+          alt=""
+          style="
+            position: absolute;
+            top: 39px;
+            left: 41px;
+            width: 538px;
+            height: auto;
+          "
+        />
+
+        <!-- overlay image -->
+        <img
+          src="/img_proofshot_sleeve.png"
+          alt=""
+          style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+          "
+        />
+      </div>
+    </div>
+  </body>
+</html>
