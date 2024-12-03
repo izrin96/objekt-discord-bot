@@ -14,19 +14,19 @@
     "drizzle-kit": "^0.28.1"
   },
   "peerDependencies": {
-    "typescript": "^5.6.2"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "discord.js": "^14.16.3",
-    "drizzle-orm": "^0.36.3",
-    "hono": "^4.6.9",
+    "drizzle-orm": "^0.36.4",
+    "hono": "^4.6.12",
     "join-images": "^1.1.5",
     "ofetch": "^1.4.1",
     "pagination.djs": "^4.0.17",
     "pg": "^8.13.1",
-    "playwright-core": "^1.48.2",
+    "playwright-core": "^1.49.0",
     "sharp": "^0.33.5",
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.15",
     "unstorage": "^1.13.1"
   }
 }
