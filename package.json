@@ -3,20 +3,27 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun run index.ts"
+    "dev": "bun run index.ts",
+    "push": "bunx drizzle-kit push",
+    "generate": "bunx drizzle-kit generate",
+    "migrate": "bunx drizzle-kit migrate"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/pg": "^8.11.10",
+    "drizzle-kit": "^0.28.1"
   },
   "peerDependencies": {
     "typescript": "^5.6.2"
   },
   "dependencies": {
     "discord.js": "^14.16.3",
+    "drizzle-orm": "^0.36.3",
     "hono": "^4.6.9",
     "join-images": "^1.1.5",
     "ofetch": "^1.4.1",
     "pagination.djs": "^4.0.17",
+    "pg": "^8.13.1",
     "playwright-core": "^1.48.2",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.14",

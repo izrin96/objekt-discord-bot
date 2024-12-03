@@ -93,7 +93,7 @@ export type ObjektsOwnedFetch = {
 }
 
 export type ObjektsMetadata = {
-    copies: number
+    total: number
     metadata: {
         id: number
         collectionId: string

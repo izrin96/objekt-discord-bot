@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, Client, CommandInteractionOptionResolver, EmbedBuilder, Events, GatewayIntentBits, Partials, REST, Routes, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, CommandInteractionOptionResolver, EmbedBuilder, Events, REST, Routes, SlashCommandBuilder } from 'discord.js';
 import { execute as objektCommand } from './commands/objekt';
 import { execute as objektsCommand } from './commands/objekts';
 import { execute as tradesCommand } from './commands/trades';
@@ -15,6 +15,7 @@ import { serveStatic } from 'hono/bun';
 import { artists } from './data/members';
 import { validClasses } from './utils';
 import { seasons } from './data/season';
+import { client } from './utils/client';
 
 const rest = new REST().setToken(process.env.TOKEN);
 
@@ -28,16 +29,6 @@ function serveHono() {
     serve(app)
 }
 serveHono()
-
-const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.DirectMessages,
-    ],
-    partials: [Partials.Channel]
-});
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);

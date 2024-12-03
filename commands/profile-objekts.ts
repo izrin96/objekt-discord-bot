@@ -61,7 +61,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                 const objekt = await ofetch<Objekt>(`https://apollo.cafe/api/objekts/by-slug/${slug}`)
 
                 const metadata = await ofetch<ObjektsMetadata>(`https://apollo.cafe/api/objekts/metadata/${slug}`)
-                const copies = metadata?.copies ?? 0
+                const copies = metadata?.total ?? 0
 
                 const embed = new EmbedBuilder()
                     .setAuthor({

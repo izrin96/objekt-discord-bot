@@ -49,7 +49,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
         for (const objekt of result) {
             try {
                 const metadata = await ofetch<ObjektsMetadata>(`https://apollo.cafe/api/objekts/metadata/${objekt.slug}`)
-                const copies = metadata?.copies ?? 0
+                const copies = metadata?.total ?? 0
 
                 const embed = new EmbedBuilder()
                     .setColor(objekt.accentColor as HexColorString)
