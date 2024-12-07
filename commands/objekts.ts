@@ -64,7 +64,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                         { name: 'Type', value: objekt.onOffline === 'online' ? 'Digital' : 'Physical', inline: true },
                         { name: 'Copies', value: `${copies}`, inline: true },
                         { name: 'Rarity', value: `${getRarity(parseInt(copies))}`, inline: true },
-                        { name: 'Tradable', value: `${metadata?.percentage ?? '-'}% (${metadata?.transferable ?? '-'})` },
+                        { name: 'Tradable', value: `${metadata?.percentage ?? '-'}% (${metadata?.transferable ?? '-'})`, inline: true },
                         { name: 'Accent Color', value: `${objekt.accentColor ?? '-'}`, inline: true },
                         { name: 'Description', value: metadata?.metadata?.description ?? '-' },
                     )

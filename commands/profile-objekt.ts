@@ -107,7 +107,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                     { name: 'Type', value: objekt.onOffline === 'online' ? 'Digital' : 'Physical', inline: true },
                     { name: 'Copies', value: `${copies}`, inline: true },
                     { name: 'Rarity', value: `${getRarity(parseInt(copies))}`, inline: true },
-                    { name: 'Tradable', value: `${metadata?.percentage ?? '-'}% (${metadata?.transferable ?? '-'})` },
+                    { name: 'Tradable', value: `${metadata?.percentage ?? '-'}% (${metadata?.transferable ?? '-'})`, inline: true },
                     { name: 'Serial', value: `${objektOwned.objektNo ?? '-'}`, inline: true },
                     { name: 'Minted at', value: time(new Date(objektOwned.mintedAt)), inline: true },
                     { name: 'Received at', value: time(new Date(objektOwned.receivedAt)), inline: true },
