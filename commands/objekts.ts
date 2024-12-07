@@ -72,7 +72,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                 const embed = new EmbedBuilder()
                     .setColor(objekt.accentColor as HexColorString)
                     .setTitle(objekt.collectionId)
-                    .setURL(`https://apollo.cafe/objekts?member=${objekt.member}&id=${objekt.slug}`)
+                    // .setURL(`https://apollo.cafe/objekts?member=${objekt.member}&id=${objekt.slug}`)
                     .addFields(fields)
                     .setImage(`${process.env.URL}/objekt-preview/${objekt.slug}`)
                     .setTimestamp(new Date(objekt.createdAt))

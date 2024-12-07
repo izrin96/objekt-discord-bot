@@ -70,7 +70,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                     })
                     .setColor(objekt.accentColor as HexColorString)
                     .setTitle(objekt.collectionId)
-                    .setURL(`https://apollo.cafe/objekts?member=${objekt.member}&id=${objekt.slug}`)
+                    // .setURL(`https://apollo.cafe/objekts?member=${objekt.member}&id=${objekt.slug}`)
                     .addFields(
                         { name: 'Artist', value: objekt.artist ?? '-', inline: true },
                         { name: 'Member', value: objekt.member ?? '-', inline: true },
