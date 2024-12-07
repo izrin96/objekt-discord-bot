@@ -11,5 +11,7 @@ services:
       - TOKEN
       - URL
       - DATABASE_URL
+    ports:
+      - 8810:3000
 volumes:
   temp:
