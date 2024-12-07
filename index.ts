@@ -122,6 +122,7 @@ async function registerGlobalCommands() {
                 .addBooleanOption(option => option.setName('secret').setDescription('Generated proof shot will be sent secretly to you').setRequired(false)),
             new SlashCommandBuilder()
                 .setName('user')
+                .setDescription('Show user information') // cannot remove, otherwise will thrown error
                 .addSubcommand(subcommand => subcommand
                     .setName('objekt')
                     .setDescription('Find latest Objekt owned by user')

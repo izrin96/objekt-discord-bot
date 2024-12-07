@@ -1,6 +1,6 @@
 import { ofetch } from "ofetch";
-import { getRarity, sendErrorEmbed, type ObjektsFetch, type ObjektsMetadata } from "../utils";
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder, MessagePayload, type HexColorString } from "discord.js";
+import { getEdition, getRarity, sendErrorEmbed, type ObjektsFetch, type ObjektsMetadata } from "../utils";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder, MessagePayload, type APIEmbedField, type HexColorString } from "discord.js";
 import { getMember } from "../data/members";
 import { getSeason } from "../data/season";
 import { getObjekts } from "../utils/objekt";
@@ -68,23 +68,30 @@ export async function execute(interaction: ChatInputCommandInteraction) {
         const metadata = await ofetch<ObjektsMetadata>(`https://apollo.cafe/api/objekts/metadata/${objekt.slug}`)
         const copies = metadata?.total
 
+        const fields: APIEmbedField[] = [
+            { name: 'Artist', value: objekt.artist ?? '-', inline: true },
+            { name: 'Member', value: objekt.member ?? '-', inline: true },
+            { name: 'Season', value: objekt.season ?? '-', inline: true },
+            { name: 'Class', value: objekt.class ?? '-', inline: true },
+            { name: 'Collection No.', value: objekt.collectionNo ?? '-', inline: true },
+            { name: 'Type', value: objekt.onOffline === 'online' ? 'Digital' : 'Physical', inline: true },
+            { name: 'Copies', value: `${copies}`, inline: true },
+            { name: 'Rarity', value: `${getRarity(parseInt(copies))}`, inline: true },
+            { name: 'Tradable', value: `${metadata?.percentage ?? '-'}% (${metadata?.transferable ?? '-'})`, inline: true },
+            { name: 'Accent Color', value: `${objekt.accentColor ?? '-'}`, inline: true },
+            { name: 'Description', value: metadata?.metadata?.description ?? '-' },
+        ]
+
+        if (objekt.class === 'First')
+        {
+            fields.splice(fields.length - 1, 0, { name: 'Edition', value: `${getEdition(objekt.collectionNo)}`, inline: true })
+        }
+
         const embed = new EmbedBuilder()
             .setColor(objekt.accentColor as HexColorString)
             .setTitle(objekt.collectionId)
             .setURL(`https://apollo.cafe/objekts?member=${objekt.member}&id=${objekt.slug}`)
-            .addFields(
-                { name: 'Artist', value: objekt.artist ?? '-', inline: true },
-                { name: 'Member', value: objekt.member ?? '-', inline: true },
-                { name: 'Season', value: objekt.season ?? '-', inline: true },
-                { name: 'Class', value: objekt.class ?? '-', inline: true },
-                { name: 'Collection No.', value: objekt.collectionNo ?? '-', inline: true },
-                { name: 'Type', value: objekt.onOffline === 'online' ? 'Digital' : 'Physical', inline: true },
-                { name: 'Copies', value: `${copies}`, inline: true },
-                { name: 'Rarity', value: `${getRarity(parseInt(copies))}`, inline: true },
-                { name: 'Tradable', value: `${metadata?.percentage ?? '-'}% (${metadata?.transferable ?? '-'})`, inline: true },
-                { name: 'Accent Color', value: `${objekt.accentColor ?? '-'}`, inline: true },
-                { name: 'Description', value: metadata?.metadata?.description ?? '-' },
-            )
+            .addFields(fields)
             .setImage(`${process.env.URL}/objekt-preview/${objekt.slug}`)
             .setTimestamp(new Date(objekt.createdAt))
             .setFooter({ text: `Source by ${metadata?.metadata?.profile?.nickname}` });

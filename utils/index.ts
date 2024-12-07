@@ -136,6 +136,21 @@ export function getRarity(copies: number) {
     return "Common";
 }
 
+export function getEdition(collectionNo: string): string {
+    const collection = parseInt(collectionNo);
+
+    if (collection >= 101 && collection <= 108) {
+        return "1st";
+    }
+    if (collection >= 109 && collection <= 116) {
+        return "2nd";
+    }
+    if (collection >= 117 && collection <= 120) {
+        return "3rd";
+    }
+    return "Unknown";
+}
+
 export const validClasses = [
     "First",
     "Special",
