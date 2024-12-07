@@ -113,7 +113,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                     { name: 'Used for grid', value: objektOwned.usedForGrid ? 'Yes' : 'No', inline: true },
                     { name: 'Description', value: metadata?.metadata?.description ?? '-' },
                 )
-                .setImage(`https://objekt-discord-bot.fly.dev/objekt-preview/${objekt.slug}?serial=${objektOwned.objektNo}`)
+                .setImage(`${process.env.URL}/objekt-preview/${objekt.slug}?serial=${objektOwned.objektNo}`)
                 .setTimestamp(new Date(objekt.createdAt))
                 .setFooter({ text: `Source by ${metadata?.metadata?.profile?.nickname}` });
 

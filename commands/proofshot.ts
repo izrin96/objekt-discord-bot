@@ -4,6 +4,7 @@ import { sendErrorEmbed } from "../utils";
 import { getSeason } from "../data/season";
 import { getObjekts } from "../utils/objekt";
 import { initBrowser } from "../utils/browser";
+import { server } from "../utils/server";
 
 export async function execute(interaction: ChatInputCommandInteraction) {
     const { options } = interaction;
@@ -64,7 +65,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
         const page = await browser.newPage();
 
         // Navigate to the proof page
-        await page.goto('http://localhost:3000/proof');
+        await page.goto(`${server.url.origin}/proof`);
 
         // Replace the objekt image and wait for it to load with a timeout
         await page.evaluate(async (url) => {

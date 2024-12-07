@@ -84,7 +84,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                 { name: 'Accent Color', value: `${objekt.accentColor ?? '-'}`, inline: true },
                 { name: 'Description', value: metadata?.metadata?.description ?? '-' },
             )
-            .setImage(`https://objekt-discord-bot.fly.dev/objekt-preview/${objekt.slug}`)
+            .setImage(`${process.env.URL}/objekt-preview/${objekt.slug}`)
             .setTimestamp(new Date(objekt.createdAt))
             .setFooter({ text: `Source by ${metadata?.metadata?.profile?.nickname}` });
 

@@ -20,3 +20,7 @@ primary_region = 'iad'
   memory = '1.5gb'
   cpu_kind = 'shared'
   cpus = 1
+
+[mounts]
+  source = "temp"
+  destination = "/app/tmp"

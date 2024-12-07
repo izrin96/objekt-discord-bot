@@ -2,17 +2,13 @@ import type { Hono } from "hono"
 import joinImages from 'join-images';
 import { ofetch } from "ofetch";
 import { type Objekt } from './utils'
-import { createStorage } from "unstorage";
-import fsDriver from "unstorage/drivers/fs";
 import { initBrowser } from "./utils/browser";
+import { storage } from "./utils/storage";
+import { server } from "./utils/server";
 
 export function registerRoute(app: Hono) {
     // app.get('/objekt-preview/:slug', async (c) => {
     //     const slug = c.req.param('slug')
-
-    //     const storage = createStorage({
-    //         driver: fsDriver({ base: "./tmp" })
-    //     });
 
     //     const cachedImage = await storage.getItemRaw(`${slug}.png`);
     //     if (cachedImage) {
@@ -51,10 +47,6 @@ export function registerRoute(app: Hono) {
         const slug = c.req.param('slug')
         const serialNo = c.req.query('serial') || ''
 
-        const storage = createStorage({
-            driver: fsDriver({ base: "./tmp" })
-        });
-
         const cachedImage = await storage.getItemRaw(`${slug}-${serialNo}.png`);
         if (cachedImage) {
             return c.body(cachedImage, 200, {
@@ -64,7 +56,7 @@ export function registerRoute(app: Hono) {
 
         const browser = await initBrowser()
         const page = await browser.newPage()
-        const response = await page.goto(`http://localhost:3000/objekt-preview-html/${slug}?serial=${serialNo}`)
+        const response = await page.goto(`${server.url.origin}/objekt-preview-html/${slug}?serial=${serialNo}`)
         if (response.status() === 404) {
             await page.close()
             return c.notFound()

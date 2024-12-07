@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, CommandInteractionOptionResolver, EmbedBuilder, Events, REST, Routes, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, CommandInteractionOptionResolver, Events, REST, Routes, SlashCommandBuilder } from 'discord.js';
 import { execute as objektCommand } from './commands/objekt';
 import { execute as objektsCommand } from './commands/objekts';
 import { execute as tradesCommand } from './commands/trades';
@@ -8,53 +8,19 @@ import { execute as profileObjektsCommand } from './commands/profile-objekts';
 import { execute as seasonCommand } from './commands/season';
 import { execute as leaderboardCommand } from './commands/leaderboard';
 import { execute as breakdownCommand } from './commands/breakdown';
-import { Hono } from 'hono';
-import { serve } from 'bun';
-import { registerRoute } from './route';
-import { serveStatic } from 'hono/bun';
 import { artists } from './data/members';
 import { validClasses } from './utils';
 import { seasons } from './data/season';
 import { client } from './utils/client';
+import { server } from './utils/server'
 
 const rest = new REST().setToken(process.env.TOKEN);
 
-function serveHono() {
-    const app = new Hono()
-    app.use('*', serveStatic({ root: './public' }))
-    app.get('/proof', (c) => {
-        return c.html(Bun.file('./public/proof.html').text())
-    })
-    registerRoute(app)
-    serve(app)
-}
-serveHono()
+console.log(server.url)
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
-
-client.on(Events.MessageCreate, async (message) => {
-    if (message.author.bot) return;
-
-    const args = message.content.split(' ');
-
-    const cmd = args[0]
-
-    if (cmd === '.o'
-        || cmd === '.obj'
-        || cmd === '.objekt'
-        || cmd === '.trades'
-        || cmd === '.os'
-        || cmd === '.objekts'
-    ) {
-        // send embed message saying that this command is deprecated
-        const embed = new EmbedBuilder()
-            .setColor('#7281B8')
-            .setDescription('This command is deprecated. Please use the slash `/` command instead.');
-        return message.channel.send({ embeds: [embed] });
-    }
-})
 
 client.on(Events.InteractionCreate, async (interaction: ChatInputCommandInteraction) => {
     if (!interaction.isCommand()) return;
