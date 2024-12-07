@@ -25,4 +25,6 @@ COPY . .
 
 # ENV PLAYWRIGHT_BROSWER_PATH="/usr/bin/chromium"
 
+EXPOSE 3000
+
 ENTRYPOINT ["bun", "run", "index.ts"]
