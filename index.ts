@@ -16,7 +16,7 @@ import { server } from './utils/server'
 
 const rest = new REST().setToken(process.env.TOKEN);
 
-console.log(server.url)
+console.log(`Listening to port: ${server.url.port}`)
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -52,7 +52,7 @@ client.on(Events.InteractionCreate, async (interaction: ChatInputCommandInteract
             return leaderboardCommand(interaction);
         }
 
-        if (commandName === 'profile') {
+        if (commandName === 'user') {
             const subcommand = (options as CommandInteractionOptionResolver).getSubcommand();
             if (subcommand === 'objekt') {
                 return profileObjektCommand(interaction);

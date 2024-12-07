@@ -49,7 +49,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
         for (const objekt of result) {
             try {
                 const metadata = await ofetch<ObjektsMetadata>(`https://apollo.cafe/api/objekts/metadata/${objekt.slug}`)
-                const copies = metadata?.total ?? 0
+                const copies = metadata?.total
 
                 const embed = new EmbedBuilder()
                     .setColor(objekt.accentColor as HexColorString)
@@ -63,7 +63,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                         { name: 'Collection No.', value: objekt.collectionNo ?? '-', inline: true },
                         { name: 'Type', value: objekt.onOffline === 'online' ? 'Digital' : 'Physical', inline: true },
                         { name: 'Copies', value: `${copies}`, inline: true },
-                        { name: 'Rarity', value: `${getRarity(copies)}`, inline: true },
+                        { name: 'Rarity', value: `${getRarity(parseInt(copies))}`, inline: true },
+                        { name: 'Tradable', value: `${metadata?.percentage ?? '-'}% (${metadata?.transferable ?? '-'})` },
                         { name: 'Accent Color', value: `${objekt.accentColor ?? '-'}`, inline: true },
                         { name: 'Description', value: metadata?.metadata?.description ?? '-' },
                     )

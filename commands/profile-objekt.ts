@@ -88,7 +88,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
             }
 
             const metadata = await ofetch<ObjektsMetadata>(`https://apollo.cafe/api/objekts/metadata/${objekt.slug}`)
-            const copies = metadata?.total ?? 0
+            const copies = metadata?.total
 
             const embed = new EmbedBuilder()
                 .setAuthor({
@@ -106,8 +106,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
                     { name: 'Collection No.', value: objekt.collectionNo ?? '-', inline: true },
                     { name: 'Type', value: objekt.onOffline === 'online' ? 'Digital' : 'Physical', inline: true },
                     { name: 'Copies', value: `${copies}`, inline: true },
-                    { name: 'Rarity', value: `${getRarity(copies)}`, inline: true },
+                    { name: 'Rarity', value: `${getRarity(parseInt(copies))}`, inline: true },
+                    { name: 'Tradable', value: `${metadata?.percentage ?? '-'}% (${metadata?.transferable ?? '-'})` },
                     { name: 'Serial', value: `${objektOwned.objektNo ?? '-'}`, inline: true },
+                    { name: 'Minted at', value: time(new Date(objektOwned.mintedAt)), inline: true },
                     { name: 'Received at', value: time(new Date(objektOwned.receivedAt)), inline: true },
                     { name: 'Transferable', value: objektOwned.transferable ? 'Yes' : 'No', inline: true },
                     { name: 'Used for grid', value: objektOwned.usedForGrid ? 'Yes' : 'No', inline: true },

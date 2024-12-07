@@ -83,7 +83,7 @@ export type ObjektOwned = {
 }
 
 export type ObjektsFetch = {
-    total: number
+    total: string
     objekts: Objekt[]
 }
 
@@ -93,7 +93,9 @@ export type ObjektsOwnedFetch = {
 }
 
 export type ObjektsMetadata = {
-    total: number
+    total: string
+    transferable: string
+    percentage: string
     metadata: {
         id: number
         collectionId: string

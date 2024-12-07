@@ -1,10 +1,10 @@
 import { ofetch } from "ofetch";
-import type { ObjektsFetch } from "../utils";
+import type { Objekt, ObjektsFetch } from "../utils";
 
 export async function getObjekts({ collection, member, artist, class: classOption, on_offline, page }: { collection?: { season: string, number: string, type: string }, member: string, artist?: string, class?: string, on_offline?: string, page?: number }) {
     const { season, number, type } = collection || {};
 
-    let result: ObjektsFetch['objekts'] = [];
+    let result: Objekt[] = [];
 
     if (number) {
         const types = type ? [type.toUpperCase()] : ['Z', 'A'];
