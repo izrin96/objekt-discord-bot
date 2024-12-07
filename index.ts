@@ -74,32 +74,32 @@ async function registerGlobalCommands() {
         body: [
             new SlashCommandBuilder()
                 .setName('objekt')
-                .setDescription('Show one latest Objekt')
+                .setDescription('Find latest Objekt')
                 .addStringOption(option =>
                     option.setName('member')
-                        .setDescription('Choose one member. Example: jiwoo')
+                        .setDescription('Choose one member. Example: jiwoo. Can be shortform such as \'jw\'')
                         .setRequired(true)
                     // .setAutocomplete(true)
                 )
                 .addStringOption(option =>
                     option.setName('collection_no')
-                        .setDescription('Format: [season]<collection_no>[type] Example: d207z')
+                        .setDescription('Format: [season]<collection_no>[type] Example: d207z or e315')
                         .setRequired(true)),
             new SlashCommandBuilder()
                 .setName('trades')
-                .setDescription('Show 30 latest trades perform by user')
+                .setDescription('Show latest trades perform by user (limit to 30)')
                 .addStringOption(option => option.setName('nickname').setDescription('Cosmo nickname').setRequired(true))
                 .addIntegerOption(option => option.setName('page').setDescription('Page number. Each page has 30 trades sorted by newest. Default: 1').setMinValue(1).setRequired(false)),
             new SlashCommandBuilder()
                 .setName('objekts')
-                .setDescription('Show 60 latest Objekts')
+                .setDescription('Show all latest Objekts (limit to 60)')
                 .addStringOption(option =>
                     option.setName('artist')
                         .setDescription('Choose one artist. Example: tripleS')
                         .addChoices(artists.map((value) => ({ name: value.name, value: value.name }))))
                 .addStringOption(option =>
                     option.setName('member')
-                        .setDescription('Choose one member. Example: jiwoo'))
+                        .setDescription('Choose one member. Example: jiwoo. Can be shortform such as \'jw\''))
                 .addStringOption(option =>
                     option.setName('class')
                         .setDescription('Objekt class. Example: Double')
@@ -110,28 +110,27 @@ async function registerGlobalCommands() {
                         .addChoices(Object.entries(seasons).map(([_, value]) => ({ name: value, value: value }))))
                 .addStringOption(option =>
                     option.setName('online_type')
-                        .setDescription('Online type. Example: online')
+                        .setDescription('Online or offline')
                         .addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))
                 .addIntegerOption(option => option.setName('page').setDescription('Page number. Each page has 60 Objekts sorted by newest. Default: 1').setMinValue(1).setRequired(false)),
             new SlashCommandBuilder()
                 .setName('proofshot')
                 .setDescription('Generate proof shot')
-                .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo').setRequired(true))
-                .addStringOption(option => option.setName('collection_no').setDescription('Format: [season]<collection_no>[type] Example: d207z').setRequired(true))
+                .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo. Can be shortform such as \'jw\'').setRequired(true))
+                .addStringOption(option => option.setName('collection_no').setDescription('Format: [season]<collection_no>[type] Example: d207z or e315').setRequired(true))
                 .addAttachmentOption(option => option.setName('image').setDescription('Image to generate proof shot').setRequired(true))
                 .addBooleanOption(option => option.setName('secret').setDescription('Generated proof shot will be sent secretly to you').setRequired(false)),
             new SlashCommandBuilder()
-                .setName('profile')
-                .setDescription('Show profile of user')
+                .setName('user')
                 .addSubcommand(subcommand => subcommand
                     .setName('objekt')
-                    .setDescription('Show one latest Objekt owned by user')
+                    .setDescription('Find latest Objekt owned by user')
                     .addStringOption(option => option.setName('nickname').setDescription('Cosmo nickname').setRequired(true))
-                    .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo').setRequired(true))
-                    .addStringOption(option => option.setName('collection_no').setDescription('Format: [season]<collection_no>[type] Example: d207z').setRequired(true)))
+                    .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo. Can be shortform such as \'jw\'').setRequired(true))
+                    .addStringOption(option => option.setName('collection_no').setDescription('Format: [season]<collection_no>[type] Example: d207z or e315').setRequired(true)))
                 .addSubcommand(subcommand => subcommand
                     .setName('objekts')
-                    .setDescription('Show 30 latest Objekts owned by user')
+                    .setDescription('Show all latest Objekts owned by user (limit to 30)')
                     .addStringOption(option =>
                         option.setName('nickname')
                             .setDescription('Cosmo nickname').setRequired(true))
@@ -141,7 +140,7 @@ async function registerGlobalCommands() {
                             .addChoices(artists.map((value) => ({ name: value.name, value: value.name }))))
                     .addStringOption(option =>
                         option.setName('member')
-                            .setDescription('Choose one member. Example: jiwoo'))
+                            .setDescription('Choose one member. Example: jiwoo. Can be shortform such as \'jw\''))
                     .addStringOption(option =>
                         option.setName('class')
                             .setDescription('Objekt class. Example: Double')
@@ -152,15 +151,15 @@ async function registerGlobalCommands() {
                             .addChoices(Object.entries(seasons).map(([_, value]) => ({ name: value, value: value }))))
                     .addStringOption(option =>
                         option.setName('online_type')
-                            .setDescription('Online type. Example: online')
+                            .setDescription('Online or offline')
                             .addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))
                     .addIntegerOption(option => option.setName('page').setDescription('Page number. Each page has 30 Objekts sorted by newest. Default: 1').setMinValue(1).setRequired(false)))
                 .addSubcommand(subcommand => subcommand
                     .setName('progress')
                     .setDescription('Show user\'s objekt progress')
                     .addStringOption(option => option.setName('nickname').setDescription('Cosmo nickname').setRequired(true))
-                    .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo').setRequired(true))
-                    .addStringOption(option => option.setName('online_type').setDescription('Online type. Example: online').addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))),
+                    .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo. Can be shortform such as \'jw\'').setRequired(true))
+                    .addStringOption(option => option.setName('online_type').setDescription('Online or offline').addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))),
             new SlashCommandBuilder()
                 .setName('season')
                 .setDescription('Show current season for artist')
@@ -168,9 +167,9 @@ async function registerGlobalCommands() {
             new SlashCommandBuilder()
                 .setName('leaderboard')
                 .setDescription('Show leaderboard for member')
-                .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo').setRequired(true))
+                .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo. Can be shortform such as \'jw\'').setRequired(true))
                 .addStringOption(option => option.setName('season').setDescription('Objekt season. Example: Divine01').addChoices(Object.entries(seasons).map(([_, value]) => ({ name: value, value: value }))))
-                .addStringOption(option => option.setName('online_type').setDescription('Online type. Example: online').addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))
+                .addStringOption(option => option.setName('online_type').setDescription('Online or offline').addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))
         ],
     })
         .then(() => console.log('Successfully registered application commands.'))
