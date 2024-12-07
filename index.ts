@@ -110,8 +110,8 @@ async function registerGlobalCommands() {
                         .addChoices(Object.entries(seasons).map(([_, value]) => ({ name: value, value: value }))))
                 .addStringOption(option =>
                     option.setName('online_type')
-                        .setDescription('Online or offline')
-                        .addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))
+                        .setDescription('Digital or physical')
+                        .addChoices([{ name: 'Digital', value: 'online' }, { name: 'Physical', value: 'offline' }]))
                 .addIntegerOption(option => option.setName('page').setDescription('Page number. Each page has 60 Objekts sorted by newest. Default: 1').setMinValue(1).setRequired(false)),
             new SlashCommandBuilder()
                 .setName('proofshot')
@@ -152,15 +152,15 @@ async function registerGlobalCommands() {
                             .addChoices(Object.entries(seasons).map(([_, value]) => ({ name: value, value: value }))))
                     .addStringOption(option =>
                         option.setName('online_type')
-                            .setDescription('Online or offline')
-                            .addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))
+                            .setDescription('Digital or physical')
+                            .addChoices([{ name: 'Digital', value: 'online' }, { name: 'Physical', value: 'offline' }]))
                     .addIntegerOption(option => option.setName('page').setDescription('Page number. Each page has 30 Objekts sorted by newest. Default: 1').setMinValue(1).setRequired(false)))
                 .addSubcommand(subcommand => subcommand
                     .setName('progress')
                     .setDescription('Show user\'s objekt progress')
                     .addStringOption(option => option.setName('nickname').setDescription('Cosmo nickname').setRequired(true))
                     .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo. Can be shortform such as \'jw\'').setRequired(true))
-                    .addStringOption(option => option.setName('online_type').setDescription('Online or offline').addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))),
+                    .addStringOption(option => option.setName('online_type').setDescription('Digital or physical').addChoices([{ name: 'Digital', value: 'online' }, { name: 'Physical', value: 'offline' }]))),
             new SlashCommandBuilder()
                 .setName('season')
                 .setDescription('Show current season for artist')
@@ -170,7 +170,7 @@ async function registerGlobalCommands() {
                 .setDescription('Show leaderboard for member')
                 .addStringOption(option => option.setName('member').setDescription('Choose one member. Example: jiwoo. Can be shortform such as \'jw\'').setRequired(true))
                 .addStringOption(option => option.setName('season').setDescription('Objekt season. Example: Divine01').addChoices(Object.entries(seasons).map(([_, value]) => ({ name: value, value: value }))))
-                .addStringOption(option => option.setName('online_type').setDescription('Online or offline').addChoices([{ name: 'Online', value: 'online' }, { name: 'Offline', value: 'offline' }]))
+                .addStringOption(option => option.setName('online_type').setDescription('Digital or physical').addChoices([{ name: 'Digital', value: 'online' }, { name: 'Physical', value: 'offline' }]))
         ],
     })
         .then(() => console.log('Successfully registered application commands.'))
