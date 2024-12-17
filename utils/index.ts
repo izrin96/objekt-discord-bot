@@ -76,6 +76,7 @@ export type ObjektOwned = {
     objektNo: number
     transferable: boolean
     status: string
+    nonTransferableReason?: string
     usedForGrid: boolean
     lenticularPairTokenId: string
     mintedAt: string

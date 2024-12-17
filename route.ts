@@ -6,6 +6,10 @@ import { initBrowser } from "./utils/browser";
 import { storage } from "./utils/storage";
 import { server } from "./utils/server";
 
+function replaceUrlSize(url: string, size: "2x" | "thumbnail" = "2x") {
+    return url.replace(/4x$/i, size);
+}
+
 export function registerRoute(app: Hono) {
     // app.get('/objekt-preview/:slug', async (c) => {
     //     const slug = c.req.param('slug')
@@ -91,8 +95,8 @@ export function registerRoute(app: Hono) {
             .replace('{collectionNo}', objekt.collectionNo)
             .replace('{serialNo}', serialNo?.toString().padStart(5, "0"))
             .replace('{name}', objekt.collectionId)
-            .replace('{imageFront}', objekt.frontImage)
-            .replace('{imageBack}', objekt.backImage)
+            .replace('{imageFront}', replaceUrlSize(objekt.frontImage))
+            .replace('{imageBack}', replaceUrlSize(objekt.backImage))
             .replace('{background}', objekt.backgroundColor)
             .replace('{text}', objekt.textColor)
 
