@@ -59,7 +59,12 @@ export function registerRoute(app: Hono) {
         }
 
         const browser = await initBrowser()
-        const page = await browser.newPage()
+        const page = await browser.newPage({
+            viewport:{
+                height: 800,
+                width: 900
+            }
+        })
         const response = await page.goto(`${server.url.origin}/objekt-preview-html/${slug}?serial=${serialNo}`)
         if (response.status() === 404) {
             await page.close()
