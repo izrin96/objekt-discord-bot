@@ -7,7 +7,7 @@ import { storage } from "./utils/storage";
 import { server } from "./utils/server";
 
 function replaceUrlSize(url: string, size: "2x" | "thumbnail" = "2x") {
-    return url.replace(/4x$/i, size);
+    return url.replace(/(4x|original)$/i, size);
 }
 
 export function registerRoute(app: Hono) {
