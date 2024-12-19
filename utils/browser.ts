@@ -6,7 +6,7 @@ export async function initBrowser() {
     if (!browser || !browser.isConnected()) {
         try {
             browser = await chromium.launch({
-                // executablePath: process.env.PLAYWRIGHT_BROSWER_PATH,
+                executablePath: process.env.PLAYWRIGHT_BROSWER_PATH,
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',

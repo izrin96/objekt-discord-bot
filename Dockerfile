@@ -13,17 +13,17 @@ RUN bun install --frozen-lockfile --production
 FROM base AS release
 
 # Install packages needed for deployment
-# RUN apt-get update -qq && \
-#     apt-get install --no-install-recommends -y chromium chromium-sandbox && \
-#     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y chromium chromium-sandbox && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-RUN bunx -y playwright@latest install --with-deps chromium
+# RUN bunx -y playwright@latest install --with-deps chromium
 # RUN bunx -y @puppeteer/browsers install chromium@latest --path /tmp/localChromium
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# ENV PLAYWRIGHT_BROSWER_PATH="/usr/bin/chromium"
+ENV PLAYWRIGHT_BROSWER_PATH="/usr/bin/chromium"
 
 EXPOSE 3000
 
