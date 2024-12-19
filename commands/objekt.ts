@@ -101,13 +101,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
             .setLabel('View in Apollo')
             .setStyle(ButtonStyle.Link);
 
-        const novaButton = new ButtonBuilder()
-            .setURL(`https://nova.gd/objekt/${objekt.slug}`)
-            .setLabel('View in Nova')
-            .setStyle(ButtonStyle.Link);
+        // const novaButton = new ButtonBuilder()
+        //     .setURL(`https://nova.gd/objekt/${objekt.slug}`)
+        //     .setLabel('View in Nova')
+        //     .setStyle(ButtonStyle.Link);
 
         const row = new ActionRowBuilder<ButtonBuilder>()
-            .addComponents(apolloButton, novaButton);
+            .addComponents(apolloButton);
 
         return interaction.editReply(new MessagePayload(interaction, {
             embeds: [embed],
