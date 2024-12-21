@@ -119,7 +119,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
             ...pagination.buttons, link: new ButtonBuilder()
                 .setLabel('View in Apollo')
                 .setStyle(ButtonStyle.Link)
-                .setURL(`https://apollo.cafe/@${user.nickname}?${new URLSearchParams(Object.fromEntries(Object.entries({ artist: artistParsed, member: memberParsed, class: classOption, season: season, on_offline }).filter(([_, v]) => v !== undefined))).toString()}`) as PButtonBuilder
+                .setURL(`https://apollo.cafe/@${user.nickname}?${new URLSearchParams(Object.fromEntries(Object.entries({ artist: artistParsed, member: memberParsed, class: classOption, season: season, on_offline }).filter(([_, v]) => v !== undefined))).toString()}`) as PButtonBuilder,
+            link2: new ButtonBuilder()
+                .setLabel('View in Lunar')
+                .setStyle(ButtonStyle.Link)
+                .setURL(`https://lunar-cosmo.vercel.app/@${user.nickname}?${new URLSearchParams(Object.fromEntries(Object.entries({ artist: artistParsed, member: memberParsed, class: classOption, season: season, on_offline }).filter(([_, v]) => v !== undefined))).toString()}`) as PButtonBuilder
         };
 
         return pagination.render();
