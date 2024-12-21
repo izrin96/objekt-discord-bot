@@ -101,13 +101,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
             .setLabel('View in Apollo')
             .setStyle(ButtonStyle.Link);
 
-        // const novaButton = new ButtonBuilder()
-        //     .setURL(`https://nova.gd/objekt/${objekt.slug}`)
-        //     .setLabel('View in Nova')
-        //     .setStyle(ButtonStyle.Link);
+        const lunarButton = new ButtonBuilder()
+            .setURL(`https://lunar-cosmo.vercel.app/?id=${objekt.slug}`)
+            .setLabel('View in Lunar')
+            .setStyle(ButtonStyle.Link);
 
         const row = new ActionRowBuilder<ButtonBuilder>()
-            .addComponents(apolloButton);
+            .addComponents(apolloButton, lunarButton);
 
         return interaction.editReply(new MessagePayload(interaction, {
             embeds: [embed],
